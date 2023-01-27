@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, intial-scale=1.0" />
+    <title>Create Post</title>
+    <link rel="stylesheet" href="/static/stylesheets/createStyle.css" />
+  </head>
+  <body>
+    <div class="hero">
+      <div class="navbar">
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile/{{ .User.Username}}">Profile</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="class">
+        <form
+          action="/post/create"
+          method="post"
+          autocomplete="off"
+          enctype="multipart/form-data"
+        >
+          <div class="input-group">
+            <input type="text" id="title" name="title" required />
+            <label for="title">Title</label>
+          </div>
+          <div class="box">
+            <!-- <select name="categories">
+            <option selected disabled>Choose the category</option>
+            <option class="sel" value="Hobby">Hobby</option>
+            <option value="Travel">Travel</option>
+            <option value="Education">Education</option>
+            <option value="Sport">Sport</option>
+            <option value="Programming">Programming</option>
+          </select> -->
+            <p>Choose the category:</p>
+            <p>
+              <input type="checkbox" name="categories" value="Hobby" /> Hobby
+            </p>
+            <p>
+              <input type="checkbox" name="categories" value="Travel" /> Travel
+            </p>
+            <p>
+              <input type="checkbox" name="categories" value="Education" />
+              Education
+            </p>
+            <p>
+              <input type="checkbox" name="categories" value="Sport" /> Sport
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="categories"
+                value="Programming"
+                checked
+              />
+              Programming
+            </p>
+          </div>
+          <div class="input-group">
+            <textarea id="content" name="content" rows="8" required></textarea>
+            <label for="content">Your Post</label>
+          </div>
+          <button type="submit">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

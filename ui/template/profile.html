@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/static/stylesheets/user.css" />
+    <link rel="icon" type="image/png" href="/static/favicon/favicon.png" />
+    <title>Profile</title>
+    <script src="https://kit.fontawesome.com/61ebb60581.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <article>
+      <header></header>
+      <main>
+        <div class="main-wrapper">
+          <div class="main-card">
+            <div class="card">
+              <div class="card-header">
+                <i class="bi bi-person-circle"></i>
+                <h1>{{ .User.Username }}</h1>
+                <h3>{{ .User.Email }}</h3>
+              </div>
+              <div class="card-about">
+                <a href="/" class="back-btn">Home</a>
+                <a href="/post/create" class="back-btn">Create Post</a>
+                <a href="/profile/{{ .ProfileUser.Username }}?posts=created" class="back-btn">My posts</a>
+                <a href="/profile/{{ .ProfileUser.Username }}?posts=liked" class="back-btn">Liked Posts</a>
+                <a href="/profile/{{ .ProfileUser.Username }}?posts=commented" class="back-btn">Commented Posts</a>
+                <a href="/auth/logout" class="back-btn">Logout</a>
+              </div>
+              <div class="card-info">
+                <div class="info">
+                  <p>{{ .ProfileUser.Posts }}</p>
+                  <h3>Posts</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="main-body">
+            {{ range .Posts }}
+            <div class="post">
+              <fieldset>
+                <!-- <legend align="right">
+                                <h3>{{ .PostAuthor }}</h3>
+                            </legend> -->
+                <div class="post-title">
+                  <h3>From:{{ .PostAuthor }}</h3>
+                  <h3><a href="/post/{{ .PostId }}">Title: {{ .Title }}</a></h3>
+                </div>
+                <div class="post-content">
+                  <pre>{{ .Content }}</pre>
+                </div>
+                <div class="foot-comment">
+                  <a href="/post/{{ .PostId }} "  class="post-info-btn">See more</a>
+                </div>
+              </fieldset>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+      </main>
+    </article>
+    <script src="/static/script/modal.js"></script>
+  </body>
+</html>

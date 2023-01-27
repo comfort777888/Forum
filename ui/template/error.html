@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/stylesheets/errorStyle.css">
+    <title>Error Page</title>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ .StatusText}}</h2>
+        <h1>{{.Status }}</h1>
+        <!-- <p>{{.ErrorMessage }}</p> -->
+        <p><a href="/">Go back home</a></p>
+    </div>
+</body>
+</html>

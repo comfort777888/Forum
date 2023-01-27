@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UserPosts</title>
+  </head>
+  <body>
+    <div class="main-body">
+      <div class="filter">
+        {{ if eq .User.Username .ProfileUser.Username }}
+        <a href="/profile/{{ .ProfileUser.Username }}?posts=liked"
+          >Liked Posts</a
+        >
+        <a href="/profile/{{ .ProfileUser.Username }}?posts=disliked"
+          >Disliked Posts</a
+        >
+        <a href="/profile/{{ .ProfileUser.Username }}?posts=commented"
+          >Commented Posts</a
+        >
+        <a href="/profile/{{ .ProfileUser.Username }}?posts=created"
+          >No filter</a
+        >
+        {{end}}
+      </div>
+      {{ range .Posts }}
+      <div class="post">
+        <div class="post-author">
+          <p>
+            From:
+            <span style="font-size: 20px; font-weight: 600">{{ .Author }}</span>
+          </p>
+        </div>
+        <div class="post-title">
+          <p>Title: {{ .Title }}</p>
+        </div>
+        <div class="post-content">{{ .Content }}</div>
+        <div class="post-footer">
+          {{ range .Category }}
+          <a href="/?category={{ . }}" class="tag">{{ . }}</a>
+          {{ end }}
+        </div>
+        <div class="post-info-btn-parent">
+          <a href="/post/{{ .ID }}" class="post-info-btn">More</a>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </body>
+</html>

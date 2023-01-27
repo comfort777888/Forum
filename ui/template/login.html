@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Forum</title>
+    <link rel="stylesheet" href="/static/stylesheets/loginStyle.css" />
+  </head>
+  <body>
+    <div class="full-page">
+      <div class="navbar">
+        <div>
+          <a href="/">Forum</a>
+        </div>
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="/">Home</a></li>
+            <!-- <li><a href="#">Contact</a></li> -->
+            <li><a href="/auth/sign-up">Register</a></li>
+            <!-- <li><a href="/contact">Contact</a></li> -->
+          </ul>
+        </nav>
+      </div>
+      <div id="login-form" class="login-page">
+        <div class="form-box">
+          <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn">Log In</button>
+          </div>
+          <form
+            action="/auth/sign-in"
+            method="post"
+            autocomplete="off"
+            id="login"
+            class="input-group-login"
+          >
+            <input
+              id="Username"
+              type="text"
+              class="input-field"
+              name="username"
+              placeholder="Username"
+              required
+            />
+            <pre>{{.Username}}</pre>
+            <input
+              type="password"
+              class="input-field"
+              name="password"
+              placeholder="Enter Password"
+              required
+            />
+            <pre>{{.Password}}</pre>
+            <button type="submit" class="submit-btn">Log in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

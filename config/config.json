@@ -1,0 +1,7 @@
+{
+    "host": "localhost",
+    "port": "9090",
+    "dbNameAndPath": "./forum.db",
+    "dbDriver": "sqlite3",
+    "ctxTimeout": 5
+}

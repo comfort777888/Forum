@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Forum</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.css"></script>
+    <link rel="stylesheet" href="/static/stylesheets/mainStyle.css" />
+  </head>
+  <body>
+    <div class="full-page">
+      <div class="navbar">
+        <div>
+          <a href="/">Forum</a>
+        </div>
+        {{ if .User.Username }}
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="/profile/{{ .User.Username}}">Profile</a></li>
+            <li><a href="/post/create">Create post</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+            <!-- <li><a href="/contact">Contact</a></li> -->
+          </ul>
+        </nav>
+        {{ else }}
+        <nav>
+          <ul id="MenuItems">
+            <!-- <li><a href="/contact">Contact</a></li> -->
+            <li><a href="/auth/sign-in">Login</a></li>
+            <li><a href="/auth/sign-up">Register</a></li>
+            <!-- <li><a href="/contact">Contact</a></li> -->
+          </ul>
+        </nav>
+        {{ end }}
+      </div>
+      <div class="containerrr">
+        <main>
+      <div class="wrapper">
+        
+           <nav>
+          <div class="items">
+            <div class="item">
+              <select class="category" name="categories" onchange="javascript:handleSelect(this)">
+                <option selected>Choose the category</option>
+                <div class="iii">
+                <option value="Hobby">Hobby</option>
+                </div>
+                <option value="Travel">Travel</option>
+                <option value="Education">Education</option>
+                <option value="Sport">Sport</option>
+                <option value="Programming">Programming</option>
+                <!-- <option value="no category">no category</option> -->
+              </select>
+              <script type="text/javascript">
+                function handleSelect(elm)
+                {
+                   window.location = "/?category="+elm.value;
+                }
+              </script>
+            </div>
+            
+            <div class="item"><a href="/?time=new">New</a></div>
+            <div class="item"><a href="/?time=old">Old</a></div>
+            <div class="item"><a href="/?clean=true">No filter</a></div>
+          </div>
+        </nav>
+      </div>
+       {{ range .Posts }}
+      <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+          <div class="col-md-8 post-card">
+            <!-- <div class="bg-white p-2"> -->
+              <div class="comment_card-main">    
+              <div class="d-flex flex-row user-info">
+                <img
+                  src="/static/myimages/profile.png"
+                  alt="user photo"
+                  class="rounded-circle"
+                />
+                <div class="d-flex flex-column justify-content-start ml-2">
+                  <h6 class="name_ad">Name: {{ .PostAuthor }}</h6>
+                  <h8 class="date_ad">Title: {{ .Title }} </h8>
+
+                  <!-- <h8 class="date_ad">Category:</h8> -->
+                
+                  <!-- <a class="date_ad" href="/?category={{.}}" class="date_ad">{{.}}</a> -->
+                   <h8 class="date_ad">Category: {{ range .Category }} {{ . }};  {{ end }}</h8> 
+            
+
+                  
+
+                </div>
+              </div>
+              <div class="mt-2">
+                <p class="comment-text" style="overflow: auto">
+                  <pre>{{ .Content }}</pre>
+                </p>
+              </div>
+              <div class="text-right">
+              <form action="/post/{{ .PostId }}">
+                <button class="btn">See more</button>
+              </form>
+            </div>
+            </div>
+            <!-- <div class="bg-white">
+              <div class="d-flex flex-row fs-12">
+              </div>
+            </div>
+            <div class="bg-light p-2">
+              <div class="mt-2 text-right">
+                <form action="/post/{{ .PostId }}">
+                  <button>See more</button>
+                </form>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      {{ end }}
+          </div>
+        </main>
+      </div>
+  </body>
+</html>

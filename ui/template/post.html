@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link
+  rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+  <link
+  rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.css"></script>
+    <link rel="stylesheet" href="/static/stylesheets/postStyle.css" />
+  <head>
+    <title>Post</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="navbar">
+        {{ if .User.Username }}
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile/{{ .User.Username}}">Profile</a></li>
+            <li><a href="/post/create">Create post</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+          </ul>
+        </nav>
+        {{ else }}
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="/">Home</a></li>
+            <li><a href="/auth/sign-in">Login</a></li>
+            <li><a href="/auth/sign-up">Register</a></li>
+          </ul>
+        </nav>
+        {{ end }}
+      </div>
+      <div class="d-flex justify-content-center row">
+        <div class="col-md-8">
+          <!-- <div class="bg-white p-2"> -->
+          <div class="comment_card-main">
+            <div class="d-flex flex-row user-info">
+              <img
+                src="/static/myimages/profile.png"
+                alt=""
+                class="rounded-circle"
+              />
+              <div class="d-flex flex-column justify-content-start ml-2">
+                <span class="d-block font-weight-bold name">
+                  Author: {{ .Post.PostAuthor}}
+                </span>
+                <span class="date text-black-50">
+                  Shared publically - {{ .Post.CreationTime }}
+                </span>
+              </div>
+            </div>
+            <div class="mt-2">
+              <p class="comment-text" style="overflow: auto;"> <pre>{{ .Post.Content }}</pre></p>
+            </div>
+            <div class="comment-reaction">
+              <div class="comment_card-footer">
+                <div>{{ .Post.Likes }}</div>
+                  <div>
+                    <form class="reactComment" action="/post/like/{{ .Post.PostId }}" method="post">
+                      <button id="like" class="vote" {{ if not .User.Username }} disabled {{ end }}>
+                        <i class="fa fa-thumbs-o-up"></i>
+                      </button>
+                    </form>
+                  </div>
+                  <div>{{ .Post.Dislikes }}</div>
+                    <div>
+                      <form class="reactComment" action="/post/dislike/{{ .Post.PostId }}" method="post">
+                        <button class="vote vote-dislike" {{ if not .User.Username }} disabled {{ end }}>
+                          <i class="fa fa-thumbs-o-down"></i>
+                        </button>
+                      </form>
+                    </div>
+                    
+              </div>
+          </div>
+        
+          </div>
+          <!-- <a href="/post/delete/{{.Post.PostId}}" >Delete post</a> -->
+          {{ $user := .User.Username }}
+          <div class="comments">
+            <div class="comments-text">
+              <b>Comments:</b>
+            </div>
+            <div class="comment_container">
+              {{ range .Comments }}
+              <div class="comment_card">
+                <h5 class="comment_title">From: {{ .Author }}</h5>
+                <div class="comment-text"><pre>{{ .Content }}</pre></div>
+                <div class="comment-reaction">
+                  <div class="comment_card-footer">
+                    <div>{{ .Likes }}</div>
+                      <div>
+                        <form class="reactComment" action="/comment/like/{{ .CommentId }}" method="post">
+                          <button id="like" class="vote" {{ if not $user }} disabled {{ end }}>
+                            <i class="fa fa-thumbs-o-up"></i>
+                          </button>
+                        </form>
+                      </div>
+                      <div>{{ .Dislikes }}</div>
+                        <div>
+                          <form class="reactComment" action="/comment/dislike/{{ .CommentId }}" method="post">
+                            <button class="vote vote-dislike" {{ if not $user }} disabled {{ end }}>
+                              <i class="fa fa-thumbs-o-down"></i>
+                            </button>
+                          </form>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              {{ else }}
+              <h3 class="no-comment">No commentaries yet</h3>
+              {{ end }}
+            </div>
+          </div>
+          {{ if .User.Username }}
+          <form
+            action="/post/{{ .Post.PostId }}"
+            method="POST"
+            class="send-comment"
+          >
+            <div class="commentary">
+              <div class="d-flex flex-row align-items-start">
+                <textarea class="form-control ml-1 shadow-none textarea" name="comment" maxlength="700" minlength="1" title="Commentary must not exceed 700 characters" required></textarea>
+              </div>
+              <div class="mt-2 text-right">
+                <button class="btn btn-success btn-sm shadow-none" type="submit">
+                  Post comment
+                </button>
+              </div>
+            </div>
+          </form>
+
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
