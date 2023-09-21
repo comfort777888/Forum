@@ -9,7 +9,7 @@
   width: 100%;
   /* background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("/static/myimages/9.jpg"); */
-  background-image: linear-gradient(125deg, #6a89cc,#b8e994);
+  background-image: linear-gradient(125deg, #6a89cc, #b8e994);
   background-position: center;
   background-size: cover;
   position: absolute;
@@ -63,7 +63,7 @@ a {
 #login-form {
   display: block;
 }
-.item select{
+.item select {
   background: transparent;
   border: transparent;
   color: #007bff;
@@ -71,7 +71,6 @@ a {
   appearance: button;
   outline: none;
   cursor: pointer;
-  
 }
 .form-box {
   width: 380px;
@@ -197,16 +196,16 @@ nav .items .item:hover {
   padding: 10px;
   border-radius: 5px;
 }
-.comment_card-main{
+.comment_card-main {
   padding: 20px;
   margin-left: -1px;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   min-width: 100%;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
 }
-.btn{
+.btn {
   background-color: #218838;
   color: #fff;
 }
