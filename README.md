@@ -7,3 +7,5 @@ to initialize program:
 
 using Makefile:
  **make run**
+
+ or use Docker commands
